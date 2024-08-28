@@ -39,14 +39,19 @@ jobs:
           name: ImageWatermarkProcessor-Windows
           path: dist/ImageWatermarkProcessor.exe
 
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::release_$(date +'%Y.%m.%d_%H-%M')"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}-${{ github.sha }}
-          release_name: Release ${{ github.ref }}-${{ github.sha }}
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          release_name: Release ${{ steps.tag.outputs.release_tag }}
           draft: false
           prerelease: false
 
