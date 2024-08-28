@@ -27,7 +27,7 @@ jobs:
 
       - name: Build executable with PyInstaller
         run: |
-          pyinstaller --onefile --windowed --name ImageWatermarkProcessor your_script_name.py
+          pyinstaller --onefile --windowed --name ImageWatermarkProcessor img2mask.py
 
       - name: Verify dist directory
         shell: pwsh
